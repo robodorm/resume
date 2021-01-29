@@ -1,0 +1,465 @@
+% sigle side document
+\documentclass[10pt,A4]{article}
+
+% set UTF8 encoding
+\usepackage[utf8]{inputenc}	
+
+% it provides a various logic to 
+% test: a string is void or not.
+\usepackage{xifthen}
+
+%----------------------------------------------------------------------------------------
+%	FONT SETTINGS
+%----------------------------------------------------------------------------------------
+
+\usepackage[thin]{roboto} 
+
+% Set font defaults
+\renewcommand*\familydefault{\sfdefault}
+
+% The default font encoding (OT1) of TeX is 
+% 7-bit and uses fonts that have 128 glyphs.
+% The T1 font encoding is an 8-bit encoding 
+% and uses fonts that have 256 glyphs.
+\usepackage[T1]{fontenc}
+
+% \HUGE and \ssmall commands
+\usepackage{moresize}
+
+%----------------------------------------------------------------------------------------
+%	PAGE LAYOUT DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+%define page styles using geometry
+\usepackage[a4paper]{geometry}
+\geometry{top=1.25cm, bottom=1cm, left=2cm, right=1.5cm}
+
+%use customized header
+\usepackage{fancyhdr}				
+\pagestyle{fancy}
+
+%less space between header and content
+\setlength{\headheight}{-5pt}
+
+
+%indentation is zero
+\setlength{\parindent}{0mm}
+
+%----------------------------------------------------------------------------------------
+%	TABLE /ARRAY DEFINITIONS
+%---------------------------------------------------------------------------------------- 
+
+%for layouting tables
+\usepackage{multicol}			
+\usepackage{multirow}
+
+%extended aligning of tabular cells
+\usepackage{array}
+
+\newcolumntype{x}[1]{%
+>{\raggedleft\hspace{0pt}}p{#1}}%
+
+%----------------------------------------------------------------------------------------
+%	GRAPHICS DEFINITIONS
+%---------------------------------------------------------------------------------------- 
+
+%for header image
+\usepackage{graphicx}
+
+%for floating figures
+\usepackage{wrapfig}
+\usepackage{float}
+%\floatstyle{boxed} 
+%\restylefloat{figure}
+
+%for drawing graphics		
+\usepackage{tikz}				
+\usetikzlibrary{shapes, backgrounds,mindmap, trees}
+
+%----------------------------------------------------------------------------------------
+%	Color DEFINITIONS
+%---------------------------------------------------------------------------------------- 
+
+\usepackage{color}
+\usepackage{xcolor}
+
+%accent color
+\definecolor{sectcol}{RGB}{0,150,255}
+
+%dark background color
+\definecolor{bgcol}{RGB}{110,110,110}
+
+%light background / accent color
+\definecolor{softcol}{RGB}{225,225,225}
+
+%----------------------------------------------------------------------------------------
+% 	HEADER
+%----------------------------------------------------------------------------------------
+
+% remove top header line
+\renewcommand{\headrulewidth}{0pt} 
+
+%remove botttom header line
+\renewcommand{\footrulewidth}{0pt}	  	
+
+%remove pagenum
+\renewcommand{\thepage}{}	
+
+%remove section num		
+\renewcommand{\thesection}{}			
+
+%----------------------------------------------------------------------------------------
+% 	ARROW GRAPHICS in Tikz
+%----------------------------------------------------------------------------------------
+
+% a six pointed arrow poiting to the left
+\newcommand{\tzlarrow}{(0,0) -- (0.2,0) -- (0.3,0.2) -- (0.2,0.4) -- (0,0.4) -- (0.1,0.2) -- cycle;}	
+
+% include the left arrow into a tikz picture
+% param1: fill color
+\newcommand{\larrow}[1]
+{\begin{tikzpicture}[scale=0.58]
+	 \filldraw[fill=#1!100,draw=#1!100!black]  \tzlarrow
+ \end{tikzpicture}
+}
+
+% a six pointed arrow poiting to the right
+\newcommand{\tzrarrow}{ (0,0.2) -- (0.1,0) -- (0.3,0) -- (0.2,0.2) -- (0.3,0.4) -- (0.1,0.4) -- cycle;}
+
+% include the right arrow into a tikz picture
+% param1: fill color
+%
+\newcommand{\rarrow}
+{\begin{tikzpicture}[scale=0.7]
+	\filldraw[fill=sectcol!100,draw=sectcol!100!black] \tzrarrow
+ \end{tikzpicture}
+}
+
+%----------------------------------------------------------------------------------------
+%	custom sections
+%----------------------------------------------------------------------------------------
+\newcommand{\cvlstitle}[1]{\flushleft{#1:}}
+
+% create a coloured box with an arrow and title as cv section headline
+% param 1: section title
+\newcommand{\cvsection}[1]
+{
+	\begin{center}
+		\large\textcolor{sectcol}{\textbf{#1}}
+	\end{center}
+}
+
+%create a coloured arrow with title as cv meta section section
+% param 1: meta section title
+\newcommand{\metasection}[2]
+{
+%\begin{tabular*}{1\textwidth}{r r}
+\footnotesize{#2} \hspace*{\fill} \footnotesize{#1}\\[1pt]
+%\end{tabular*}
+}
+
+%----------------------------------------------------------------------------------------
+%	 CV EVENT
+%----------------------------------------------------------------------------------------
+
+\newcommand{\cvlist}[1] {
+	\begin{itemize}{#1}\end{itemize}
+	\vspace{6pt}
+}
+
+\newcommand{\cvevent}[3]
+{
+	\begin{tabular*}{1\textwidth}{p{13.6cm}  x{3.9cm}}
+		\textbf{#2} - \textcolor{bgcol}{#3} &   \vspace{2.5pt}\textcolor{sectcol}{#1}
+	\end{tabular*}
+
+	\vspace{-8pt}
+	\textcolor{softcol}{\hrule}
+	\vspace{6pt}
+}
+
+% creates a stretched box as 
+\newcommand{\cveventmeta}[2]
+{
+	\mbox{\mystrut \hspace{87pt}\textit{#1}}\\
+	#2
+}
+
+%----------------------------------------------------------------------------------------
+% CUSTOM STRUT FOR EMPTY BOXES
+%----------------------------------------- ----------------------------------------------
+\newcommand{\mystrut}{\rule[-.3\baselineskip]{0pt}{\baselineskip}}
+
+\begin{document}
+
+%use our custom fancy header definitions
+\pagestyle{fancy}	
+
+
+%----------------------------------------------------------------------------------------
+%	HEADER IMAGE (TODO)
+%----------------------------------------------------------------------------------------
+
+%\begin{figure}[H]
+%\begin{flushright}
+%	\includegraphics[trim= 320 130 460 210,clip,width=0.2\linewidth]{photo.jpg}	%trimming relative to image size!
+%\end{flushright}
+%\end{figure}
+
+%---------------------------------------------------------------------------------------
+%	TITLE HEADLINE
+%---------------------------------------------------------------------------------------
+\vspace{-8pt}
+\begin{center}
+	\HUGE \textsc{Vladimir E.} \textcolor{sectcol}{\rule[-1mm]{1mm}{0.9cm}} \textsc{CV}\\[2pt]
+	\small Software Engineer
+\end{center}
+
+\vspace{6pt}
+
+%---------------------------------------------------------------------------------------
+%	META SECTION
+%----------------------------------------------------------------------------------------
+\metasection{Berlin, Germany}{\textbf{Languages:} Python, Golang}
+\metasection{github.com/lootbox}{\textbf{Fields:} Software Engineering, Clouds, Data Analysis}
+\metasection{gist.github.com/lootbox}{\textbf{Platforms:} AWS, GCP, Kubernetes, bare-metal}
+\metasection{vladimir.e@outlook.com}{\textbf{Activities:} Programming, Machine Learning, Information Security}
+\vspace{-2pt}
+\textcolor{softcol}{\hrule}
+\vspace{6pt}
+
+\normalsize
+
+%---------------------------------------------------------------------------------------
+%	SUMMARAY (optional)
+%---------------------------------------------------------------------------------------
+\vspace{-6pt}
+\cvsection{Summary}
+More that 10 years experience of development and infrastructure building. Use modern approaches to build resilient, scalable and supportable multi-tenant infrastructure. Currently I focus on taking to the next level software change management pipeline, infrastructure user experience; decreasing time to market and optimizing delivery pipeline in the company.\\
+
+%---------------------------------------------------------------------------------------
+%	EXPERIENCE
+%---------------------------------------------------------------------------------------
+\cvsection{Experience}
+
+\cvevent{Jul 2020 - present}{Lead Infrastructure Engineer}{Passbase; Berlin}
+\cvlstitle{Responsibilities}
+\cvlist{
+	\item Using modern approaches to build resilient, scalable and supportable multi-tenant infrastructure
+	\item Fully immutable for production and fully disposable for testing (or similar)
+	\item Solving scalability and resilience problems using gitops, infrastructure as code, micro-services, container orchestration, distributed databases, and message queues
+	\item Maintaining the security of the company systems: closely working with "Security" department on the information Security Management (ISO/IEC 27001) certification, security compartmentalization and using SIEM tools for detecting external threats; Assets compartmentalization to decrease impact on company in case of success attack; Defining security "chain of trust" for entire company
+	\item Working with "Deep tech" department on the assessment ML/AI services and tools that could perform liveliness human detection
+}
+\cvlstitle{Technologies}
+\cvlist{
+	\item Python, Golang, Postgres
+	\item AWS
+	\item Terraform, Ansible
+	\item ConcourseCI
+	\item nomad, k8s, vault, consul, grafana, prometheus, etc
+}
+%
+\cvevent{Sep 2014 - Jun 2016}{Senior SRE / DevOps Engineer}{Smava GmbH; Berlin}
+\cvlstitle{Responsibilities}
+\cvlist{
+	\item Making micro-service infrastructure play well together
+	\item Lifting to the cloud with immutable infrastructure-as-code and self-service tools
+	\item Assist the architectural redesign to increase system reliability to operate at scale
+	\item Eliminating toil by automating repetitive tasks
+	\item Coaching the software engineers on how to use the platform infrastructure
+}
+\cvlstitle{Technologies}
+\cvlist{
+	\item Kubernetes (with Istio/Envoy), Docker Swarm and Docker
+	\item AWS, GCP
+	\item Python, Golang, Groovy
+	\item Automation Tools (Ansible, Salt and Terraform)
+	\item Kafka, RabbitMQ, PostgreSQL, Redis
+	\item Monitoring Tools (Splunk, Grafana, Prometheus and OpsGenie)
+}
+
+%\textcolor{softcol}{\hrule}
+
+%
+\cvevent{Feb 2018 - Aug 2019}{Engineering Lead}{Renault Digital; Moscow}
+\cvlstitle{Responsibilities}
+\cvlist{
+	\item Interviewed, trained and evaluated applicants
+	\item Design local private cloud (multi tenant, multi DC with DB-as-a-service) infrastructure based on opensource tools
+	\item Design and implement software solutions for the Alliance partners (car plants, major dealers, internal development) all over the world
+	\item Building a cloud native distributed software
+	\item Experience with multiple data centers and cloud infrastructure
+}
+\cvlstitle{Technologies}
+\cvlist{
+	\item Python, NodeJS/Typescript, Java/Springboot
+	\item Postgresql, MySQL, Mongodb, Redis, Memcached
+	\item Kubernetes, Nomad, AWS, bare-metal
+	\item ansible, docker, Jenkins, git, Terraform
+}
+
+%\textcolor{softcol}{\hrule}
+
+%
+\cvevent{Feb 2015 - Sep 2017}{Senior Software Engineer}{Yandex LLC; Moscow}
+\cvlstitle{Responsibilities}
+\cvlist{
+	\item Building distributed scalable services with modern technologies.
+	\item Designing high-performance and reliable infrastructure: from load balancer to the app container.
+	\item Project overview, Performance, Automation, Security.
+	\item Designing and implementing complex and reliable new end-to-end services
+	\item Interviewed, trained and evaluated applicants
+	\item Architected and participated in development of existing web applications
+	\item DevOps: k8s, clouds, multi-DC infrastructure
+}
+\cvlstitle{Technologies}
+\cvlist{
+	\item Python, Flask, PHP
+	\item MySQL, Postgres
+	\item OpenStack, docker, bare-metal
+	\item Salt-stack, ansible, terraform
+}
+\cvlstitle{Launched the following services}
+\cvlist{
+	\item https://delivery.yandex.ru
+	\item https://health.yandex.ru
+}
+%\textcolor{softcol}{\hrule}
+
+%
+\cvevent{Mar 2014 - Feb 2015}{Team Leader / Head of Development (Python)}{CIAN Media LLC; Moscow}
+\cvlstitle{Responsibilities}
+\cvlist{
+	\item Designing and implementing brand new backend and frontend platform (based on Django)
+	\item Migrating from legacy php codebase to the new solution (backend and frontend)
+	\item Fullstack developer
+	\item Coaching and mentoring team members
+	\item Responsible for infrastructure and devops
+}
+\cvlstitle{Technologies}
+\cvlist{
+	\item python, django, celery
+	\item mysql, redis, memcache,
+	\item jenkins, git, linux
+}
+%\textcolor{softcol}{\hrule}
+
+
+%
+\cvevent{Oct 2013 - Mar 2014}{Team Leader / Head of Development}{HighLoad++; Moscow}
+\cvlstitle{Responsibilities}
+\cvlist{
+	\item Building Internet resources for the high traffic
+	\item Was developed private social network designed for traffic load up to 600 000 rps
+}
+\cvlstitle{Technologies}
+\cvlist{
+	\item mysql, php
+}
+%\textcolor{softcol}{\hrule}
+
+%
+\cvevent{Aug 2011 - Sep 2013}{Team Leader / Head of Development}{Fabrika Online; Moscow}
+\cvlstitle{Responsibilities}
+\cvlist{
+	\item Built a full cycle of enterprise software development
+	\item Used "Jenkins" for Continuous Integration, snapshot and release builds
+	\item Integrating unit, functional and load testing for projects
+	\item Setup a Wiki ("Confluence") to manage developer documentation
+	\item Introduced SCRUM/Agile to manage the development "sprints"
+	\item Switching to the new task/bug tracking system ("Jira")
+	\item Designing and implementation workflow for the developers
+}
+\cvlstitle{Technologies}
+\cvlist{
+	\item Javascript: NodeJS, AngularJS
+	\item Databases: MongoDB, memcached, Redis
+	\item Python: Flask, Django
+	\item Queue: RabbitMQ (with Celery)
+	\item PHP: Symfony, HipHop from Facebook
+	\item OS: Linux (ubuntu)
+	\item Virt.: KVM, LXC
+	\item VCS: GIT (GitLab)
+	\item And best practices to make developing even better
+}
+%\textcolor{softcol}{\hrule}
+
+
+%
+\cvevent{May 2011 – Sep 2013}{Software Data Engineer}{Buongiorno; Moscow}
+\cvlstitle{Responsibilities}
+\cvlist{
+	\item Develop new features and support biggest loyalty project in Russia: MTS Bonus
+	\item ETL based on Unix command line tools, like sed, awk, cat, tail, grep, parallel, and more...
+}
+\cvlstitle{Technologies}
+\cvlist{
+	\item Python, Perl, PHP
+	\item MySQL
+}
+%\textcolor{softcol}{\hrule}
+
+
+%
+\cvevent{Jul 2009 – Mar 2011}{Software Engineer}{Greenmama; Moscow}
+\cvlstitle{Responsibilities}
+\cvlist{
+	\item Development new features and support company web resources
+	\item Administration company servers
+}
+\cvlstitle{Technologies}
+\cvlist{
+	\item PHP, Perl
+	\item mysql
+	\item FreeBSD
+}
+%\textcolor{softcol}{\hrule}
+
+
+%
+\cvevent{Jan 2007 – Jul 2009}{Junior Software Engineer}{felix.ru; Moscow}
+\cvlstitle{Responsibilities}
+\cvlist{
+	\item Develop new features and support intranet portal
+}
+\cvlstitle{Technologies}
+\cvlist{
+	\item PHP
+	\item mysql
+	\item Linux
+}
+%\textcolor{softcol}{\hrule}
+
+
+%
+\cvevent{Jun 2004 – Jan 2007}{Junior Engineer}{MOSINTER; Moscow}
+\cvlstitle{Responsibilities}
+\cvlist{
+	\item Support network at small internet provider.
+}
+\cvlstitle{Technologies}
+\cvlist{
+	\item FreeBSD
+	\item Perl
+}
+
+
+%--------------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%--------------------------------------------------------------------------------------
+\cvsection{Education}
+
+\cvevent{1998 – 2003}{Master's degree: Radio and Television Engineer}{Crimea Federal University}{}
+
+%\textcolor{softcol}{\hrule}
+
+%
+\cvevent{2016}{Introduction to machine learning}{Coursera; Credential ID: 2J7GYMT75976}
+
+\null
+\vspace*{\fill}
+\hspace{-0.25\linewidth}\colorbox{white}{\makebox[1.5\linewidth][c]{\mystrut  \textnormal{\textcolor{sectcol}{https://www.linkedin.com/in/0x0123/} $\cdot$ \textcolor{sectcol}{https://github.com/lootbox}}}}
+
+
+\end{document}
